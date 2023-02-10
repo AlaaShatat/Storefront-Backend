@@ -7,6 +7,8 @@ const app = express();
 
 // import routes
 import userRoute from './routes/user';
+import productRoute from './routes/product';
+
 const port = 8000;
 
 // initialize server
@@ -20,6 +22,6 @@ app.use(cookieParser());
 
 // app routes
 app.use('/api', userRoute);
-
+app.use('/api', productRoute);
 // export
 export default app;
