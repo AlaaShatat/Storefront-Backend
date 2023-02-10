@@ -1,7 +1,7 @@
 import client from "../database";
 
 export type User = {
-    id: Number,
+    id: Number | null,
     firstName: string,
     lastName: string,
     hashedPass: string
@@ -25,7 +25,7 @@ export class userStorage{
     }
 
     // show a user
-    async show(id: string): Promise<User[]>{
+    async show(id:number): Promise<User>{
         try{
             const conn = await client.connect();
             const sql = 'SELECT * FROM users WHERE id={$1}';
@@ -41,20 +41,19 @@ export class userStorage{
     }
 
     // sign up 
-    async create(user: User): Promise<User[]>{
+    async create(user: User): Promise<User>{
         try{
             const conn = await client.connect();
-            const sql = 'INSERT INTO users (firstName, lastName, hashedPass) VALUES $(1,2,3,4) RETURNING *';
+            const sql = 'INSERT INTO users (firstname, lastname, hashedpass) VALUES ($1,$2,$3) RETURNING *';
             const result = await conn.query(sql, [user.firstName, user.lastName, user.hashedPass]);
-            
             // release connections
             conn.release();
             return result.rows[0];
         }
         catch(err){
-            throw new Error(`Could not get users. Error: ${err}`)
+            throw new Error(`Could not insert the user. Error: ${err}`)
         };       
     }
 
-    // sign in TBD
+    // sign in
 };
