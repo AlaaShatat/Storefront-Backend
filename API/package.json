@@ -7,7 +7,7 @@
     "build": "npx tsc",
     "start": "nodemon src/server.ts",
     "jasmine": "jasmine",
-    "test": "npm run build && db-migrate --env test up && npm run jasmine",
+    "test": "ENV=test && npm run build && db-migrate --env test up && npm run jasmine",
     "prettier": "prettier --config .prettierrc \"src/**/*.ts\" --write"
   },
   "keywords": [],
@@ -26,6 +26,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.3",
+    "ts-dotenv": "^0.9.1",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4"
   },
@@ -34,6 +35,7 @@
     "bcrypt": "^5.1.0",
     "db-migrate": "^0.11.13",
     "db-migrate-pg": "^1.2.2",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jasmine": "^4.5.0",
     "jasmine-spec-reporter": "^7.0.0",
