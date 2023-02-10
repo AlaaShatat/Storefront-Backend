@@ -16,22 +16,21 @@ const indexAll = async(req: express.Request, res: express.Response): Promise<voi
 // get user by id 
 const showUser = async (req: express.Request, res: express.Response): Promise<void> =>{
     // get the id from params
-    const id: number = req.params.id? Number(req.params.id) : -1; 
-    try{
+    const id: number = req.query.id? Number(req.query.id) : -1; 
+
+    //try{
         const allUsers = new userStorage();
         const user: User = await allUsers.show(id);
 
         await res.status(200).send(user);
-    }
-    catch(err){
-        await res.status(400).send({'error': "couldn't find user"});
-    };
+    //}
+    //catch(err){
+      //  await res.status(400).send({'error': "couldn't find user"});
+    //};
 }
 // create new user
 const signup = async (req: express.Request, res: express.Response): Promise<void> =>{
     // get the user data from req body
-    console.log(req.body); //getting undefined
-
     const fName: string = req.body.firstName? req.body.firstName: null;
     const lName: string = req.body.lastName?req.body.lastName: null ;
     const pass: string = req.body.hashedPass? req.body.hashedPass: null;
@@ -47,16 +46,16 @@ const signup = async (req: express.Request, res: express.Response): Promise<void
         lastName: lName,
         hashedPass: pass
     };
-    //try{
+    try{
 
         const allUsers = new userStorage();
         const user: User = await allUsers.create(reqUser);
 
         await res.status(200).send(user);
-    //}
-    //catch(err){
-      //  await res.status(400).send({'error': "couldn't find user"});
-    //};
+    }
+    catch(err){
+        await res.status(400).send({'error': "couldn't find user"});
+    };
 }
 
 
