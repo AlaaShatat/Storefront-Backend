@@ -16,7 +16,7 @@ const indexAll = async(req: express.Request, res: express.Response): Promise<voi
 // get product by id 
 const showProduct = async (req: express.Request, res: express.Response): Promise<void> =>{
     // get the id from params
-    const id: number = req.query.id? Number(req.query.id) : -1; 
+    const id: number = req.params.productId? Number(req.params.productId) : -1; 
 
     try{
         const allProducts = new productStorage();

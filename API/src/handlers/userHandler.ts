@@ -1,11 +1,12 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 // folders
 import { User, userStorage } from '../models/user';
 
 dotenv.config()
-const secret: string = process.env.JWT_SECRET || "secret";
+const secret: string = process.env.JWT_SECRET || "secret_alo2a";
+
 // get all users
 const indexAll = async(req: express.Request, res: express.Response): Promise<void> =>{
     try{
@@ -21,8 +22,8 @@ const indexAll = async(req: express.Request, res: express.Response): Promise<voi
 // get user by id 
 const showUser = async (req: express.Request, res: express.Response): Promise<void> =>{
     // get the id from params
-    const id: number = req.query.id? Number(req.query.id) : -1; 
-
+    const id: number = req.params.userId? Number(req.params.userId) : -1; 
+    console.log(id);
     try{
         const allUsers = new userStorage();
         const user: User = await allUsers.show(id);
