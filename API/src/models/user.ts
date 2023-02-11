@@ -11,9 +11,11 @@ const saltRounds: number = Number(process.env.SALT_ROUNDS) || 10
 
 export type User = {
     id: Number | null,
-    firstName: string,
-    lastName: string,
-    hashedPass: string
+    firstname: string,
+    lastname: string,
+    hashedpass: string,
+    email: string,
+    isadmin: number
 };
 
 export class userStorage{
@@ -53,11 +55,11 @@ export class userStorage{
     async create(user: User): Promise<User>{
         try{
             const hash = bcrypt.hashSync(
-                user.hashedPass + pepper, 
+                user.hashedpass + pepper, 
                 saltRounds
               );            const conn = await client.connect();
-            const sql = 'INSERT INTO users (firstname, lastname, hashedpass) VALUES ($1,$2,$3) RETURNING *';
-            const result = await conn.query(sql, [user.firstName, user.lastName, hash]);
+            const sql = 'INSERT INTO users (firstname, lastname, hashedpass, email, isadmin) VALUES ($1,$2,$3,$4,$5) RETURNING *';
+            const result = await conn.query(sql, [user.firstname, user.lastname, hash, user.email, user.isadmin]);
             // release connections
             conn.release();
             return result.rows[0];
@@ -67,5 +69,39 @@ export class userStorage{
         };       
     }
 
+    // show a user
+    async findByEmail(email:string): Promise<User>{
+        try{
+            const conn = await client.connect();
+            const sql = 'SELECT * FROM users WHERE email=($1)';
+            const result = await conn.query(sql, [email]);
+            
+            // release connections
+            conn.release();
+            return result.rows[0];
+        }
+        catch(err){
+            throw new Error(`Could not get user. Error: ${err}`)
+        };       
+    }
     // sign in
+    async signinUser(email:string, pass: string): Promise<User|null>{
+        try{
+            // check if the email exists
+            const tempUser: User = await this.findByEmail(email);
+            const plain:string = pass+pepper;
+            const hashed: string = tempUser.hashedpass;
+            const flag:boolean = await bcrypt.compareSync(plain, hashed);
+            if (tempUser){
+                if (flag) {
+                    console.log('password checked');
+                    return tempUser;
+                  }
+            }
+            return null;
+        }
+        catch(err){
+            throw new Error(`Could not get user. Error: ${err}`);
+        };       
+    }
 };
