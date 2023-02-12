@@ -16,13 +16,13 @@ exports.signout = exports.signin = exports.signup = exports.showUser = exports.i
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
 // folders
-const user_1 = require("../models/user");
+const userStorage_1 = require("../models/userStorage");
 dotenv_1.default.config();
 const secret = process.env.JWT_SECRET || "secret_alo2a";
 // get all users
 const indexAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const allUsers = new user_1.userStorage();
+        const allUsers = new userStorage_1.userStorage();
         const users = yield allUsers.index();
         yield res.status(200).send(users);
     }
@@ -38,7 +38,7 @@ const showUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.userId ? Number(req.params.userId) : -1;
     console.log(id);
     try {
-        const allUsers = new user_1.userStorage();
+        const allUsers = new userStorage_1.userStorage();
         const user = yield allUsers.show(id);
         yield res.status(200).send(user);
     }
@@ -60,7 +60,7 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (fName == null || lName == null || pass == null || email == null) {
         yield res.status(400).send({ 'error': "missing information" });
     }
-    const allUsers = new user_1.userStorage();
+    const allUsers = new userStorage_1.userStorage();
     // check if email already exists
     const emailFlag = yield allUsers.findByEmail(email);
     if (emailFlag) {
@@ -99,7 +99,7 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     else {
         // continue
         try {
-            const allUsers = new user_1.userStorage();
+            const allUsers = new userStorage_1.userStorage();
             // check if email doesn't exist
             const returnedUser = yield allUsers.findByEmail(email);
             if (!returnedUser) {
@@ -112,7 +112,6 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     // genrate token
                     const token = jsonwebtoken_1.default.sign({ id: user.id }, secret);
                     // add to in the cookie with expire date
-                    res.cookie("token", token);
                     yield res.status(200).json({ token, user: { id, firstname, lastname, email, isadmin } });
                 }
             }

@@ -1,10 +1,6 @@
 import client from "../database";
+import { Product } from "../types/product";
 
-export type Product = {
-    id: Number | null,
-    pName: string,
-    price: number
-};
 export class productStorage{
     // show all products
     async index(): Promise<Product[]>{
@@ -44,7 +40,7 @@ export class productStorage{
             
             const conn = await client.connect();
             const sql = 'INSERT INTO products (pname, price) VALUES ($1,$2) RETURNING *';
-            const result = await conn.query(sql, [product.pName, product.price]);
+            const result = await conn.query(sql, [product.pname, product.price]);
             // release connections
             conn.release();
             return result.rows[0];

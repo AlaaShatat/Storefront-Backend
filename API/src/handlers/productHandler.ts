@@ -1,5 +1,6 @@
 import express from 'express';
-import { Product, productStorage } from '../models/product';
+import {productStorage } from '../models/product';
+import { Product } from '../types/product';
 
 // get all products
 const indexAll = async(req: express.Request, res: express.Response): Promise<void> =>{
@@ -40,7 +41,7 @@ const createProduct = async (req: express.Request, res: express.Response): Promi
     } 
     const reqProduct: Product = {
         id: null,
-        pName: pName,
+        pname: pName,
         price: price
     };
     try{

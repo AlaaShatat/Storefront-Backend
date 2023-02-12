@@ -3,7 +3,7 @@ import { expressjwt } from 'express-jwt';
 import dotenv from 'dotenv';
 
 import { CustomRequest } from '../extendRequest/customRequest';
-import { User } from '../models/user';
+
 dotenv.config()
 
 const requireSignin = expressjwt({

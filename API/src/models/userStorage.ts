@@ -1,22 +1,12 @@
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import client from "../database";
-
+import { User } from '../types/User';
 
 dotenv.config()
 // pepper and salt configuration
 const pepper: string = process.env.BCRYPT_PASSWORD || "alo2a";
 const saltRounds: number = Number(process.env.SALT_ROUNDS) || 10
-
-
-export type User = {
-    id: Number | null,
-    firstname: string,
-    lastname: string,
-    hashedpass: string,
-    email: string,
-    isadmin: number
-};
 
 export class userStorage{
     // show all users

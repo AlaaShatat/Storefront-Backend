@@ -50,7 +50,7 @@ const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
     const reqProduct = {
         id: null,
-        pName: pName,
+        pname: pName,
         price: price
     };
     try {

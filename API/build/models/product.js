@@ -55,7 +55,7 @@ class productStorage {
             try {
                 const conn = yield database_1.default.connect();
                 const sql = 'INSERT INTO products (pname, price) VALUES ($1,$2) RETURNING *';
-                const result = yield conn.query(sql, [product.pName, product.price]);
+                const result = yield conn.query(sql, [product.pname, product.price]);
                 // release connections
                 conn.release();
                 return result.rows[0];

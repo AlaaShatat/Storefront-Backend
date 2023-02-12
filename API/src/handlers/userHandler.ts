@@ -2,7 +2,8 @@ import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 // folders
-import { User, userStorage } from '../models/user';
+import { userStorage } from '../models/userStorage';
+import { User } from '../types/User';
 
 dotenv.config()
 const secret: string = process.env.JWT_SECRET || "secret_alo2a";
@@ -101,7 +102,6 @@ const signin = async (req: express.Request, res: express.Response): Promise<void
                     // genrate token
                     const token = jwt.sign({id:user.id}, secret);
                     // add to in the cookie with expire date
-                    res.cookie("token",token)
                     await res.status(200).json({token,user: {id, firstname, lastname, email, isadmin} });
                 }
             }
