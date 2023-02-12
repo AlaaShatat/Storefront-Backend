@@ -17,9 +17,9 @@ const server_1 = __importDefault(require("../../server"));
 const request = (0, supertest_1.default)(server_1.default);
 const user = {
     "firstName": "test1",
-    "lastName": "test",
+    "lastName": "lol",
     "hashedPass": "test",
-    "email": "test1@test.com",
+    "email": "lol@test.com",
     "isAdmin": 1
 };
 describe('Test API user endpoint', () => {

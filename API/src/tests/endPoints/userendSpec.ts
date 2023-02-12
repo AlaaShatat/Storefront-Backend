@@ -6,9 +6,9 @@ import { User } from "../../types/User";
 const request = supertest(app);
 const user = {
     "firstName":"test1",
-    "lastName":"test",
+    "lastName":"lol",
     "hashedPass":"test",
-    "email":"test1@test.com",
+    "email":"lol@test.com",
     "isAdmin":1
 };
 describe('Test API user endpoint', () => {

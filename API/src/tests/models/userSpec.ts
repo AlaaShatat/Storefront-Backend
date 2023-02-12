@@ -22,7 +22,7 @@ describe("User Model", () => {
         firstname:"test",
         lastname:"test",
         hashedpass:"test",
-        email:"testjas@test.com",
+        email:"jas@jas.com",
         isadmin:1
       };
       const res: User = await users.create(user);

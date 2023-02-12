@@ -18,7 +18,7 @@ const order = {
         }
     ]
 };
-describe('Test API endpoint', () => {
+describe('Test API order endpoint', () => {
     // signup neworder
     it('create new order with 200 status post /api/order/create/1', async (): Promise<void> => {
         const response = await request.post('/api/order/create/1').send(order).set('Accept', 'application/json');

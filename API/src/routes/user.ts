@@ -8,7 +8,7 @@ const userRoute = express.Router();
 
 // routes
 userRoute.get('/user/:userId',requireSignin,isAuth, isAdmin, indexAll);
-userRoute.get('/user/find/:userId', showUser);
+userRoute.get('/user/find/:userId',requireSignin,isAuth, showUser);
 userRoute.post('/user/signup', signup);
 userRoute.post('/user/signin', signin);
 userRoute.post('/user/signout', signout);

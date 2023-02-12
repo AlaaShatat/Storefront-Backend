@@ -1,4 +1,4 @@
-/*import supertest from "supertest";
+import supertest from "supertest";
 
 import app from "../../server";
 
@@ -12,8 +12,8 @@ describe('Test API product endpoint', () => {
         const res = await request.get('/api/product');
         expect(res.status).toBe(200);
     });
-    it('show one product with 200 status get /api/product/find/1', async (): Promise<void> => {
-        const res = await request.get('/api/product/find/1');
+    it('show one product with 200 status get /api/product/find/4', async (): Promise<void> => {
+        const res = await request.get('/api/product/find/4');
         expect(res.status).toBe(200);
     });
-});*/
+});

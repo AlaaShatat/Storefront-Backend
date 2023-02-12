@@ -7,7 +7,7 @@ const orderRoute = express.Router();
 
 // routes
 orderRoute.get('/order/:userId', requireSignin,isAuth,isAdmin,indexAll);
-orderRoute.get('/order/find/:orderId', showOrder);
+orderRoute.get('/order/find/:orderId', requireSignin,isAuth,showOrder);
 orderRoute.get('/order/find/current/:userId',requireSignin, isAuth,showCurrentOrder);
 orderRoute.get('/order/find/current/details/:userId',requireSignin, isAuth,showCurrentOrderDetails);
 
