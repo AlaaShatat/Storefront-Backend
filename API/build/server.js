@@ -11,6 +11,7 @@ const app = (0, express_1.default)();
 // import routes
 const user_1 = __importDefault(require("./routes/user"));
 const product_1 = __importDefault(require("./routes/product"));
+const order_1 = __importDefault(require("./routes/order"));
 const port = 8000;
 // initialize server
 app.listen(port, () => {
@@ -23,5 +24,6 @@ app.use((0, cookie_parser_1.default)());
 // app routes
 app.use('/api', user_1.default);
 app.use('/api', product_1.default);
+app.use('/api', order_1.default);
 // export
 exports.default = app;
