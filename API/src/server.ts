@@ -8,6 +8,7 @@ const app = express();
 // import routes
 import userRoute from './routes/user';
 import productRoute from './routes/product';
+import orderRoute from './routes/order';
 
 const port = 8000;
 
@@ -23,5 +24,6 @@ app.use(cookieParser());
 // app routes
 app.use('/api', userRoute);
 app.use('/api', productRoute);
+app.use('/api', orderRoute);
 // export
 export default app;
