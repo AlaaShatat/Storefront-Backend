@@ -59,7 +59,6 @@ assets folder containes:
     - Test the endpoint.
     - test the database.
 ## Samples
-### Note, this process only the jpg format.
 - successfully test:
 ![My Image](API/samples/jasmineTest.png)
 - signup information:
