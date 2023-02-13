@@ -7,7 +7,10 @@ Udacity Web-Development ND aims to Build a JavaScript API based on a requirement
 - admin can do the regular user functions, however, admin has extra access and authority as show all 
     users,create new product, show all orders, show order by id.
 - please make sure to signin to have access to most of the features except sor navigating products.
-- the authentication will check based on the request if it requires admin or not
+- the authentication will check based on the request if it requires admin or not.
+- create account as admin first so you can continue.
+- create the database one for testing and one for development.
+- you can find a  postman collection in the project folder.
 ### All scripts will be found in the package.json
 ## Run The project
 - make sure to have .env file to set up all variablesyou will find an exammple for it under the name .envExamples
@@ -71,5 +74,3 @@ assets folder containes:
 ![My Image](API/samples/createOrder.png)
 - show current order:
 ![My Image](API/samples/showCurrent.png)
-
-
