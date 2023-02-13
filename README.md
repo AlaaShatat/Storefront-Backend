@@ -24,9 +24,6 @@ run db-migrate up to run migrate the database.
 2. To compile run: npm run build.
 3. the compiled files will exist in the build folder.
 4. you can run the compiled code by: nodemon build/server.js.
-## Run prettier
-1. Go to API folder, Bash or the terminal
-2. To run prettier: npm run prettier.
 ## Run the unit tests
 1. Go to API folder, Bash or the terminal.
 2. To run the unit tests:
@@ -34,7 +31,7 @@ run db-migrate up to run migrate the database.
     - or you can run npm test.
 
 # Folders Structure
-## Assets folder
+## samples folder
 assets folder containes:
     - some examples screenshots.
 ## build folder
@@ -52,7 +49,11 @@ assets folder containes:
 4. ###  services
 - In order to write a clean code, there are two files:
     - auth file contains the middlwares for authentication
-    - order_products to insert the products of the order
+    - order_products to insert the products of the order.
+    ##### Notes
+    - note, in order to add anything that requires authentication and signin, you'll need
+        to add authorization header "if it was a full stack the client should send it in the request header" with bearer and the token, but in order to facilitate
+        this process I'm puttuing it as a middlware in the "putToken function" in auth services which will automatically generate it.
 5. ### tests
 - contains the unit tests for the API including:
     - Test the endpoint.
