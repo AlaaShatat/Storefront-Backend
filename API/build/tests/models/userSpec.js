@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const userStorage_1 = require("../../models/userStorage");
 const users = new userStorage_1.userStorage();
-describe("User Model", () => {
+describe('User Model', () => {
     it('should have an index method', () => {
         expect(users.index).toBeDefined();
     });
@@ -24,11 +24,11 @@ describe("User Model", () => {
     it('create should create new user', () => __awaiter(void 0, void 0, void 0, function* () {
         const user = {
             id: null,
-            firstname: "test",
-            lastname: "test",
-            hashedpass: "test",
-            email: "jas@jas.com",
-            isadmin: 1
+            firstname: 'test',
+            lastname: 'test',
+            hashedpass: 'test',
+            email: 'jas@jas.com',
+            isadmin: 1,
         };
         const res = yield users.create(user);
         user.id = res.id;

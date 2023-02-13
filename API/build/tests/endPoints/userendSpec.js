@@ -14,13 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
 const server_1 = __importDefault(require("../../server"));
+let token = '';
 const request = (0, supertest_1.default)(server_1.default);
 const user = {
-    "firstName": "test1",
-    "lastName": "lol",
-    "hashedPass": "test",
-    "email": "lol@test.com",
-    "isAdmin": 1
+    firstName: 'test',
+    lastName: 'test',
+    hashedPass: 'test',
+    email: 'test@test.com',
+    isAdmin: 1,
 };
 describe('Test API user endpoint', () => {
     // signup newUser
@@ -31,23 +32,39 @@ describe('Test API user endpoint', () => {
             .set('Accept', 'application/json')
             .expect(200)
             .end((err) => {
-            if (err)
-                return done();
-            done();
+            //console.log("Error Signin up",err);
+            if (err) {
+                console.log(`Error creating the user ${err}`);
+                done.fail();
+            }
+            else
+                done();
         });
     });
-    it('respond with 200 signedin', function (done) {
-        (0, supertest_1.default)(server_1.default)
-            .post('/api/user/sigin')
-            .send({ "email": "test@test.com", "pass": "test" })
+    it('respond with 200 signedin', () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request
+            .post('/api/user/signin')
+            .send({ email: 'test@test.com', pass: 'test' })
+            .set('Accept', 'application/json');
+        token = '' + res.body.token;
+        expect(res.status).toBe(200);
+    }));
+    it('get all users', () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request
+            .get('/api/user/4')
             .set('Accept', 'application/json')
-            .expect(200)
-            .end((err) => {
-            if (err)
-                return done();
-            done();
-        });
-    });
+            .set('Authorization', `Bearer ${token}`);
+        expect(res.status).toBe(200);
+    }));
+    it('get user by id', () => __awaiter(void 0, void 0, void 0, function* () {
+        console.log(`token is ${token}`);
+        const res = yield request
+            .get('/api/user/find/4')
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${token}`);
+        console.log(res.body);
+        expect(res.status).toBe(200);
+    }));
     it('signout user with 200 status post /api/user/signout', () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request.post('/api/user/signout');
         expect(res.status).toBe(200);

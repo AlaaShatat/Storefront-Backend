@@ -49,7 +49,21 @@ These are the notes from a meeting with the frontend developer that describe wha
 - quantity of each product in the order
 - user_id
 - status of order (active or complete)
+#### order_products
+- id
+- order_id
+-product_id
+- quantity
 ##### Notes
     - note, in order to add anything that requires authentication and signin, you'll need
         to add authorization header "if it was a full stack the client should send it in the request header" with bearer and the token, but in order to facilitate
         this process I'm puttuing it as a middlware in the "putToken function" in auth services which will automatically generate it.
+## database schema
+- users shcema:
+![My Image](API/samples/users.png)
+- products schema:
+![My Image](API/samples/products.png)
+- orders schema:
+![My Image](API/samples/orders.png)
+- order_products schema:
+![My Image](API/samples/order_products.png)

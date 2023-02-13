@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const product_1 = require("../../models/product");
 const products = new product_1.productStorage();
-describe("Product Model", () => {
+describe('Product Model', () => {
     it('should have an index method', () => {
         expect(products.index).toBeDefined();
     });
@@ -24,8 +24,8 @@ describe("Product Model", () => {
     it('create should create new product', () => __awaiter(void 0, void 0, void 0, function* () {
         const product = {
             id: null,
-            pname: "bag",
-            price: 50
+            pname: 'bag',
+            price: 50,
         };
         const res = yield products.create(product);
         expect(res).toBeDefined();
@@ -35,7 +35,8 @@ describe("Product Model", () => {
         expect(res.length).toBeGreaterThanOrEqual(1);
     }));
     it('should return product by id', () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield products.show(1);
+        const resBefore = yield products.index();
+        const res = yield products.show(Number(resBefore[0].id));
         expect(res).toBeDefined();
     }));
 });

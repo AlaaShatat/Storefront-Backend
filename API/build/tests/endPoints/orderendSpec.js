@@ -15,38 +15,55 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
 const server_1 = __importDefault(require("../../server"));
 const request = (0, supertest_1.default)(server_1.default);
-const product = {
-    pName: 'test',
-    price: 5,
+const order = {
+    product_number: 5,
+    complete_status: false,
+    products: [
+        {
+            product_id: 1,
+            product_qty: 2,
+        },
+        {
+            product_id: 2,
+            product_qty: 3,
+        },
+    ],
 };
 let token = '';
-let userId = 1;
-let productId = 1;
-describe('Test API product endpoint', () => {
-    it('should signin the user first', () => __awaiter(void 0, void 0, void 0, function* () {
+let userId = '1';
+let orderId = 1;
+describe('Test API order endpoint', () => {
+    // should signin first
+    it('should signin first before creatinge order', () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request
             .post('/api/user/signin')
             .send({ email: 'test@test.com', pass: 'test' })
             .set('Accept', 'application/json');
         token = res.body.token;
-        userId = res.body.user.id;
+        userId = yield res.body.user.id;
+        console.log('user id ', userId);
         expect(res.status).toBe(200);
     }));
-    it('get all products with 200 status get /api/product', () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield request.get('/api/product');
-        expect(res.status).toBe(200);
-    }));
-    it('should create new product ', () => __awaiter(void 0, void 0, void 0, function* () {
+    it('get all orders with 200 status ', () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request
-            .post(`/api/product/create/${userId}`)
-            .send(product)
+            .get(`/api/order/${userId}`)
             .set('Accept', 'application/json')
             .set('Authorization', `Bearer ${token}`);
-        productId = res.body.id;
         expect(res.status).toBe(200);
     }));
-    it('show one product with 200 status', () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield request.get(`/api/product/find/${productId}`);
+    it('show current order without details with 200 status ', () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request
+            .get(`/api//order/find/current/${userId}`)
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${token}`);
+        console.log(res.status);
+        expect(res.status).toBe(200);
+    }));
+    it('show current order with details for user with 200 status', () => __awaiter(void 0, void 0, void 0, function* () {
+        const res = yield request
+            .get(`/api/order/find/current/details/${userId}`)
+            .set('Accept', 'application/json')
+            .set('Authorization', `Bearer ${token}`);
         expect(res.status).toBe(200);
     }));
 });

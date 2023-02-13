@@ -12,8 +12,20 @@ Udacity Web-Development ND aims to Build a JavaScript API based on a requirement
 - create the database one for testing and one for development.
 - you can find a  postman collection in the project folder.
 ### All scripts will be found in the package.json
+## set up the datbase
+- we use postgres for this project, kindly setup prostgres environments and open the terminal or via query.
+- create new user, ex:
+    - CREATE USER myuser WITH PASSWORD 'mypass';
+- create databse for the development and testing, ex: 
+    - CREATE DATABASE storefront;
+    - CREATE DATABASE storefront_test;
+- grant all privileges:
+    - GRANT ALL PRIVILEGES ON DATABASE storefront TO myuser;
+    - GRANT ALL PRIVILEGES ON DATABASE storefront_test TO myuser
+## set up .env file
+- make sure to add .env file to set up all variables. you will find an example for it under the name .envExamples.
 ## Run The project
-- make sure to have .env file to set up all variablesyou will find an exammple for it under the name .envExamples
+- make sure to have .env file to set up all variables you will find an example for it under the name .envExamples
 1. Go to API folder.
 2. run npm install "to download all the node-modules in the package.json".
 run db-migrate up to run migrate the database.

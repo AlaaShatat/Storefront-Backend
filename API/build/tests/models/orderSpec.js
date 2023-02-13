@@ -10,8 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const orderModel_1 = require("../../models/orderModel");
+const userStorage_1 = require("../../models/userStorage");
 const orders = new orderModel_1.orderStorage();
-describe("order Model", () => {
+const users = new userStorage_1.userStorage();
+describe('order Model', () => {
     it('should have an index method', () => {
         expect(orders.index).toBeDefined();
     });
@@ -25,18 +27,19 @@ describe("order Model", () => {
         expect(orders.create).toBeDefined();
     });
     it('should create new order', () => __awaiter(void 0, void 0, void 0, function* () {
+        const user = yield users.index();
         const order = {
             id: null,
-            user_id: 1,
+            user_id: Number(user[0].id),
             product_number: 3,
-            complete_status: false
+            complete_status: false,
         };
         const res = yield orders.create(order);
         expect(res).toEqual({
             id: res.id,
-            user_id: 1,
+            user_id: res.user_id,
             product_number: 3,
-            complete_status: false
+            complete_status: false,
         });
     }));
     it('should return all orders index', () => __awaiter(void 0, void 0, void 0, function* () {
