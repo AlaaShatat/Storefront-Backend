@@ -49,32 +49,34 @@ const signup = async (req: express.Request, res: express.Response): Promise<void
     {
         await res.status(400).send({'error': "missing information"});
     }
-    const allUsers = new userStorage();
-    // check if email already exists
-    const emailFlag: User = await allUsers.findByEmail(email);
-    if (emailFlag){
-        await res.status(400).send({"error": "email already exists"});
-    }
-    else{
-        // create instance to be sent
-        const reqUser: User = {
-            id: null,
-            firstname: fName,
-            lastname: lName,
-            hashedpass: pass,
-            email: email,
-            isadmin: isAdmin
-        };
-        try{
-            const user: User = await allUsers.create(reqUser);
-
-            await res.status(200).send(user);
-        }
-        catch(err){
-            await res.status(400).send({'error': "wrong information"});
-        };
-    }
     
+    else{
+        const allUsers = new userStorage();
+        // check if email already exists
+        const emailFlag: User = await allUsers.findByEmail(email);
+        if (emailFlag){
+            await res.status(400).send({"error": "email already exists"});
+        }
+        else{
+            // create instance to be sent
+            const reqUser: User = {
+                id: null,
+                firstname: fName,
+                lastname: lName,
+                hashedpass: pass,
+                email: email,
+                isadmin: isAdmin
+            };
+            try{
+                const user: User = await allUsers.create(reqUser);
+
+                await res.status(200).send(user);
+            }
+            catch(err){
+                await res.status(400).send({'error': "wrong information"});
+            };
+        }
+    }
 };
 // signin user
 const signin = async (req: express.Request, res: express.Response): Promise<void> =>{
