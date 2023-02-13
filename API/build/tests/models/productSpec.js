@@ -35,7 +35,7 @@ describe("Product Model", () => {
         expect(res.length).toBeGreaterThanOrEqual(1);
     }));
     it('should return product by id', () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield products.show(4);
+        const res = yield products.show(1);
         expect(res).toBeDefined();
     }));
 });

@@ -38,7 +38,9 @@ const createProduct = async (req: express.Request, res: express.Response): Promi
     if (pName == null || price < 0)
     {
         await res.status(400).send({'error': "missing information"});
-    } 
+        return;
+    }
+
     const reqProduct: Product = {
         id: null,
         pname: pName,

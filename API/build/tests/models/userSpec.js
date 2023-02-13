@@ -41,7 +41,7 @@ describe("User Model", () => {
         expect(res.length).toBeGreaterThanOrEqual(0);
     }));
     it('should return user by id', () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield users.show(4);
+        const res = yield users.show(1);
         expect(res).toBeDefined;
     }));
 });

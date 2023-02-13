@@ -22,7 +22,7 @@ describe("order Model", () => {
     it('should create new order',async () => {
       const order: Order={
         id: null,
-        user_id:4,
+        user_id:1,
         product_number:3,
         complete_status:false
       };

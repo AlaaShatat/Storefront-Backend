@@ -27,14 +27,14 @@ describe("order Model", () => {
     it('should create new order', () => __awaiter(void 0, void 0, void 0, function* () {
         const order = {
             id: null,
-            user_id: 4,
+            user_id: 1,
             product_number: 3,
             complete_status: false
         };
         const res = yield orders.create(order);
         expect(res).toEqual({
             id: res.id,
-            user_id: 4,
+            user_id: 1,
             product_number: 3,
             complete_status: false
         });

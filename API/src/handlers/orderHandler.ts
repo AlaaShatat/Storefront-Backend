@@ -87,6 +87,7 @@ const createOrder = async (req: express.Request, res: express.Response): Promise
     if (product_number <=0 || user_id <= 0 || product_list.length<1)
     {
         await res.status(400).send({'error': "missing information"});
+        return;
     } 
     const reqOrder: Order = {
         id: null,

@@ -60,30 +60,32 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (fName == null || lName == null || pass == null || email == null) {
         yield res.status(400).send({ 'error': "missing information" });
     }
-    const allUsers = new userStorage_1.userStorage();
-    // check if email already exists
-    const emailFlag = yield allUsers.findByEmail(email);
-    if (emailFlag) {
-        yield res.status(400).send({ "error": "email already exists" });
-    }
     else {
-        // create instance to be sent
-        const reqUser = {
-            id: null,
-            firstname: fName,
-            lastname: lName,
-            hashedpass: pass,
-            email: email,
-            isadmin: isAdmin
-        };
-        try {
-            const user = yield allUsers.create(reqUser);
-            yield res.status(200).send(user);
+        const allUsers = new userStorage_1.userStorage();
+        // check if email already exists
+        const emailFlag = yield allUsers.findByEmail(email);
+        if (emailFlag) {
+            yield res.status(400).send({ "error": "email already exists" });
         }
-        catch (err) {
-            yield res.status(400).send({ 'error': "wrong information" });
+        else {
+            // create instance to be sent
+            const reqUser = {
+                id: null,
+                firstname: fName,
+                lastname: lName,
+                hashedpass: pass,
+                email: email,
+                isadmin: isAdmin
+            };
+            try {
+                const user = yield allUsers.create(reqUser);
+                yield res.status(200).send(user);
+            }
+            catch (err) {
+                yield res.status(400).send({ 'error': "wrong information" });
+            }
+            ;
         }
-        ;
     }
 });
 exports.signup = signup;
