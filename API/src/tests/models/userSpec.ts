@@ -39,7 +39,7 @@ describe("User Model", () => {
     });
 
     it('should return user by id',async () => {
-      const res: User= await users.show(4);
+      const res: User= await users.show(1);
       expect(res).toBeDefined;
     });
 });

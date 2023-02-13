@@ -32,7 +32,7 @@ describe("Product Model", () => {
     });
 
     it('should return product by id',async () => {
-      const res: Product= await products.show(4);
+      const res: Product= await products.show(1);
         expect(res).toBeDefined();
     });
 });

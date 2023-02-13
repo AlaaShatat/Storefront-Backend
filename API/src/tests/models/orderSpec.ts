@@ -30,7 +30,7 @@ describe("order Model", () => {
       const res: Order= await orders.create(order);
       expect(res).toEqual({
         id: res.id,
-        user_id:4,
+        user_id:1,
         product_number:3,
         complete_status:false
       });
