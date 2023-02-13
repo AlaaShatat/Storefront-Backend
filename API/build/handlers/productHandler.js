@@ -47,6 +47,7 @@ const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     // check if any is null 
     if (pName == null || price < 0) {
         yield res.status(400).send({ 'error': "missing information" });
+        return;
     }
     const reqProduct = {
         id: null,

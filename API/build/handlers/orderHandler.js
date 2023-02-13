@@ -89,6 +89,7 @@ const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     // check if any is null 
     if (product_number <= 0 || user_id <= 0 || product_list.length < 1) {
         yield res.status(400).send({ 'error': "missing information" });
+        return;
     }
     const reqOrder = {
         id: null,
