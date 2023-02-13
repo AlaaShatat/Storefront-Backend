@@ -16,8 +16,9 @@ Udacity Web-Development ND aims to Build a JavaScript API based on a requirement
 - make sure to have .env file to set up all variablesyou will find an exammple for it under the name .envExamples
 1. Go to API folder.
 2. run npm install "to download all the node-modules in the package.json".
+run db-migrate up to run migrate the database.
 3. to run the API: npm run start.
-4. Go to postman and you can follow the endpoints in the requirements.md.
+4. Go to postman and you can follow the endpoints in the requirements.md or import the collection.
 ## Compile the project
 1. Go to API folder open Bash or the terminal.
 2. To compile run: npm run build.
