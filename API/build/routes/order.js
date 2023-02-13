@@ -9,9 +9,9 @@ const auth_1 = require("../services/auth");
 const orderRoute = express_1.default.Router();
 // handlers
 // routes
-orderRoute.get('/order/:userId', auth_1.requireSignin, auth_1.isAuth, auth_1.isAdmin, orderHandler_1.indexAll);
-orderRoute.get('/order/find/:orderId', orderHandler_1.showOrder);
-orderRoute.get('/order/find/current/:userId', auth_1.requireSignin, auth_1.isAuth, orderHandler_1.showCurrentOrder);
-orderRoute.get('/order/find/current/details/:userId', auth_1.requireSignin, auth_1.isAuth, orderHandler_1.showCurrentOrderDetails);
-orderRoute.post('/order/create/:userId', auth_1.requireSignin, auth_1.isAuth, orderHandler_1.createOrder);
+orderRoute.get('/order/:userId', auth_1.putToken, auth_1.requireSignin, auth_1.isAuth, auth_1.isAdmin, orderHandler_1.indexAll);
+orderRoute.get('/order/find/:orderId', auth_1.putToken, auth_1.requireSignin, auth_1.isAuth, auth_1.isAdmin, orderHandler_1.showOrder);
+orderRoute.get('/order/find/current/:userId', auth_1.putToken, auth_1.requireSignin, auth_1.isAuth, orderHandler_1.showCurrentOrder);
+orderRoute.get('/order/find/current/details/:userId', auth_1.putToken, auth_1.requireSignin, auth_1.isAuth, orderHandler_1.showCurrentOrderDetails);
+orderRoute.post('/order/create/:userId', auth_1.putToken, auth_1.requireSignin, auth_1.isAuth, orderHandler_1.createOrder);
 exports.default = orderRoute;

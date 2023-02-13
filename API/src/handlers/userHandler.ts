@@ -102,7 +102,9 @@ const signin = async (req: express.Request, res: express.Response): Promise<void
                     // genrate token
                     const token = jwt.sign({id:user.id}, secret);
                     // add to in the cookie with expire date
-                    await res.status(200).json({token,user: {id, firstname, lastname, email, isadmin} });
+                    await res.cookie("token", token); 
+                    await res.header('Authorization','Bearer '+token);
+                    await res.status(200).json({token,user: {id, firstname, lastname, email, isadmin}});
                 }
             }
         }

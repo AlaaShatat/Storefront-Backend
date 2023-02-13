@@ -112,6 +112,8 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     // genrate token
                     const token = jsonwebtoken_1.default.sign({ id: user.id }, secret);
                     // add to in the cookie with expire date
+                    yield res.cookie("token", token);
+                    yield res.header('Authorization', 'Bearer ' + token);
                     yield res.status(200).json({ token, user: { id, firstname, lastname, email, isadmin } });
                 }
             }

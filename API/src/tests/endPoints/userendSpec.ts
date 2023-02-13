@@ -34,16 +34,7 @@ describe('Test API user endpoint', () => {
                 if (err) return done();
                 done();
             });
-    });/*
-    it('get all users with 200 status get /api/user/4', async (): Promise<void> => {
-        const resp = await request.post('api/user/signin').send({"email":"test@test.com", "pass":"test"});
-        const res = await request.get('/api/user/4').set('Authorization',resp.body.token);
-        expect(res.status).toBe(200);
     });
-    it('show one user with 200 status get /api/user/find/5', async (): Promise<void> => {
-        const res = await request.get('/api/user/find/1');
-        expect(res.status).toBe(200);
-    });*/
     it('signout user with 200 status post /api/user/signout', async (): Promise<void> => {
         const res = await request.post('/api/user/signout');
         expect(res.status).toBe(200);

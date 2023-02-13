@@ -5,14 +5,20 @@ import dotenv from 'dotenv';
 import { CustomRequest } from '../extendRequest/customRequest';
 import { User } from '../types/User';
 import { userStorage } from '../models/userStorage';
+import { signedCookies } from 'cookie-parser';
 dotenv.config()
+
+const putToken = async (req:express.Request, res:express.Response, next:Function)=>{
+    req.headers['Authorization'] = 'Bearer '+req.cookies["token"];
+    next();
+  };
+    
 
 const requireSignin = expressjwt({
     secret: process.env.JWT_SECRET || "secret_alo2a",
     algorithms: ["HS256"],
-    requestProperty: "auth"  
+    requestProperty: "auth"
 });
-
 const isAuth = (req: express.Request, res: express.Response, next: Function) =>{
     // auth is the user signed in 
     // profile is the requested 
@@ -36,4 +42,4 @@ const isAdmin = async (req: express.Request, res: express.Response, next: Functi
     }
     next ();
 };
-export {requireSignin, isAuth, isAdmin};
+export {requireSignin, isAuth, isAdmin, putToken};

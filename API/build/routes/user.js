@@ -9,8 +9,8 @@ const auth_1 = require("../services/auth");
 const userRoute = express_1.default.Router();
 // handlers
 // routes
-userRoute.get('/user/:userId', auth_1.requireSignin, auth_1.isAuth, auth_1.isAdmin, userHandler_1.indexAll);
-userRoute.get('/user/find/:userId', userHandler_1.showUser);
+userRoute.get('/user/:userId', auth_1.putToken, auth_1.requireSignin, auth_1.isAuth, auth_1.isAdmin, userHandler_1.indexAll);
+userRoute.get('/user/find/:userId', auth_1.putToken, auth_1.requireSignin, auth_1.isAuth, userHandler_1.showUser);
 userRoute.post('/user/signup', userHandler_1.signup);
 userRoute.post('/user/signin', userHandler_1.signin);
 userRoute.post('/user/signout', userHandler_1.signout);

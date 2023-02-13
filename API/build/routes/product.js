@@ -11,5 +11,5 @@ const productRoute = express_1.default.Router();
 // routes
 productRoute.get('/product/', productHandler_1.indexAll);
 productRoute.get('/product/find/:productId', productHandler_1.showProduct);
-productRoute.post('/product/create/:userId', auth_1.requireSignin, auth_1.isAuth, auth_1.isAdmin, productHandler_1.createProduct);
+productRoute.post('/product/create/:userId', auth_1.putToken, auth_1.requireSignin, auth_1.isAuth, auth_1.isAdmin, productHandler_1.createProduct);
 exports.default = productRoute;
