@@ -64,8 +64,8 @@ assets folder containes:
     - order_products to insert the products of the order.
     ##### Notes
     - note, in order to add anything that requires authentication and signin, you'll need
-        to add authorization header "if it was a full stack the client should send it in the request header" with bearer and the token, but in order to facilitate
-        this process I'm puttuing it as a middlware in the "putToken function" in auth services which will automatically generate it.
+        to add authorization header "if it was a full stack the client should send it in the request header" with bearer and the token,
+        ,thus you have to put authorization with the token in the headers.
 5. ### tests
 - contains the unit tests for the API including:
     - Test the endpoint.
