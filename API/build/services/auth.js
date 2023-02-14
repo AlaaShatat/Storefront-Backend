@@ -18,24 +18,25 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const userStorage_1 = require("../models/userStorage");
 dotenv_1.default.config();
 const putToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    req.headers['Authorization'] = 'Bearer ' + req.cookies["token"];
+    req.headers['Authorization'] = 'Bearer ' + req.cookies['token'];
     next();
 });
 exports.putToken = putToken;
 const requireSignin = (0, express_jwt_1.expressjwt)({
-    secret: process.env.JWT_SECRET || "secret_alo2a",
-    algorithms: ["HS256"],
-    requestProperty: "auth"
+    secret: process.env.JWT_SECRET || 'secret_alo2a',
+    algorithms: ['HS256'],
+    requestProperty: 'auth',
 });
 exports.requireSignin = requireSignin;
 const isAuth = (req, res, next) => {
-    // auth is the user signed in 
-    // profile is the requested 
-    // so we need to match the signed in with the requested if they are the same 
-    const flag = req.auth && Number(req.params.userId) == req.auth.id;
+    // auth is the user signed in
+    // profile is the requested
+    // so we need to match the signed in with the requested if they are the same
+    const flag = req.auth &&
+        Number(req.params.userId) == req.auth.id;
     if (!flag) {
         return res.status(403).json({
-            error: "Access denied"
+            error: 'Access denied',
         });
     }
     next();
@@ -45,9 +46,9 @@ const isAdmin = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
     const allusers = new userStorage_1.userStorage();
     const user = yield allusers.show(Number(req.auth.id));
     if (user.isadmin == 0) {
-        // it should be auth as auth is the user signed in  
+        // it should be auth as auth is the user signed in
         return res.status(403).json({
-            error: "Admin resource! Access denied"
+            error: 'Admin resource! Access denied',
         });
     }
     next();

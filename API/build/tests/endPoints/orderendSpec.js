@@ -32,17 +32,32 @@ const order = {
 let token = '';
 let userId = '1';
 let orderId = 1;
+const user = {
+    firstName: 'test',
+    lastName: 'test',
+    hashedPass: 'test',
+    email: 'order@test.com',
+    isAdmin: 1,
+};
 describe('Test API order endpoint', () => {
     // should signin first
-    it('should signin first before creatinge order', () => __awaiter(void 0, void 0, void 0, function* () {
+    beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
+        const res1 = yield request
+            .post('/api/user/signup')
+            .send({
+            firstName: 'test',
+            lastName: 'test',
+            hashedPass: 'test',
+            email: 'order@test.com',
+            isAdmin: 1,
+        })
+            .set('Accept', 'application/json');
         const res = yield request
             .post('/api/user/signin')
-            .send({ email: 'test@test.com', pass: 'test' })
+            .send({ email: 'order@test.com', pass: 'test' })
             .set('Accept', 'application/json');
-        token = res.body.token;
-        userId = yield res.body.user.id;
-        console.log('user id ', userId);
-        expect(res.status).toBe(200);
+        token = '' + res.body.token;
+        userId = res.body.user.id;
     }));
     it('get all orders with 200 status ', () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request

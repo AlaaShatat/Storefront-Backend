@@ -19,18 +19,34 @@ const product = {
     pName: 'test',
     price: 5,
 };
+const user = {
+    firstName: 'test',
+    lastName: 'test',
+    hashedPass: 'test',
+    email: 'product@test.com',
+    isAdmin: 1,
+};
 let token = '';
 let userId = 1;
 let productId = 1;
 describe('Test API product endpoint', () => {
-    it('should signin the user first', () => __awaiter(void 0, void 0, void 0, function* () {
+    beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
+        const res1 = yield request
+            .post('/api/user/signup')
+            .send({
+            firstName: 'test',
+            lastName: 'test',
+            hashedPass: 'test',
+            email: 'product@test.com',
+            isAdmin: 1,
+        })
+            .set('Accept', 'application/json');
         const res = yield request
             .post('/api/user/signin')
-            .send({ email: 'test@test.com', pass: 'test' })
+            .send({ email: 'product@test.com', pass: 'test' })
             .set('Accept', 'application/json');
-        token = res.body.token;
+        token = '' + res.body.token;
         userId = res.body.user.id;
-        expect(res.status).toBe(200);
     }));
     it('get all products with 200 status get /api/product', () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield request.get('/api/product');

@@ -4,6 +4,7 @@ import app from '../../server';
 import { User } from '../../types/User';
 
 let token = '';
+let userId: number = 1;
 const request = supertest(app);
 const user = {
   firstName: 'test',
@@ -14,6 +15,25 @@ const user = {
 };
 describe('Test API user endpoint', () => {
   // signup newUser
+  beforeAll(async () => {
+    const res1 = await request
+      .post('/api/user/signup')
+      .send({
+        firstName: 'test',
+        lastName: 'test',
+        hashedPass: 'test',
+        email: 'user@test.com',
+        isAdmin: 1,
+      })
+      .set('Accept', 'application/json');
+
+    const res = await request
+      .post('/api/user/signin')
+      .send({ email: 'user@test.com', pass: 'test' })
+      .set('Accept', 'application/json');
+    token = '' + res.body.token;
+    userId = res.body.user.id;
+  });
   it('respond with 200 created', function (done) {
     supertest(app)
       .post('/api/user/signup')
@@ -33,13 +53,12 @@ describe('Test API user endpoint', () => {
       .post('/api/user/signin')
       .send({ email: 'test@test.com', pass: 'test' })
       .set('Accept', 'application/json');
-    token = '' + res.body.token;
     expect(res.status).toBe(200);
   });
 
   it('get all users', async (): Promise<void> => {
     const res = await request
-      .get('/api/user/4')
+      .get(`/api/user/${userId}`)
       .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${token}`);
 
@@ -48,7 +67,7 @@ describe('Test API user endpoint', () => {
   it('get user by id', async (): Promise<void> => {
     //console.log(`token is ${token}`);
     const res = await request
-      .get('/api/user/find/4')
+      .get(`/api/user/find/${userId}`)
       .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${token}`);
 
